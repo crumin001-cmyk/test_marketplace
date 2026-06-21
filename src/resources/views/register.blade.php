@@ -11,7 +11,7 @@
 
         <h2>会員登録</h2>
 
-        <form method="POST" action="{{ route('register') }}">
+        <form method="POST" action="{{ route('register') }}" novalidate>
             @csrf
             <div class="form-group">
                 <label>ユーザー名</label>

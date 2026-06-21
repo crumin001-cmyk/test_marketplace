@@ -30,7 +30,7 @@
             @csrf
 
             <label>ユーザー名</label>
-            <input type="text" class="input">
+            <input type="text" class="input" value="{{ old('name', $user->name) }}">
 
             <label>郵便番号</label>
             <input type="text" class="input">

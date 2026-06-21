@@ -11,10 +11,9 @@ class ItemController extends Controller
     public function index(Request $request)
     {
         $tab = $request->query('tab', 'recommend');
-        $items = Item::all();
         
         if ($tab === 'mylist') {
-            $items = Item::whereHas('favorite', function ($query) {
+            $items = Item::whereHas('favoriteUsers', function ($query) {
                 $query->where('user_id', auth()->id());
                 })->get();
                 
@@ -27,8 +26,30 @@ class ItemController extends Controller
         }
             
             $items = $items->get();
-    }
+        }
     
     return view('items.index', compact('items', 'tab'));
     }
+
+    public function favorite($item_id)
+    {
+        Auth::user()->favorite()->syncWithoutDetaching([$item_id]);
+        return back();
+    }
+
+    public function show(Item $item) 
+    {
+        return view('items.show', compact('item')); 
+    } 
+    
+    public function comments() 
+    {
+        return $this->hasMany(Comment::class); 
+    }
+
+    public function comment(Request $request, Item $item)
+    {
+        //
+    }
+
 }

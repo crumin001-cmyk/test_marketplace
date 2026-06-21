@@ -46,11 +46,13 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/firstlogin', [ProfileController::class, 'store'])
         ->name('storeFirstLogin');
         });
-        
         Route::get('/', [ItemController::class, 'index'])->name('items.index');//商品一覧
+        Route::post('/item/{item_id}/favorite', [ItemController::class, 'favorite'])->name('items.favorite');
         Route::get('/mypage', [ProfileController::class, 'mypage'])->name('mypage');//マイページ
         Route::get('//mypage/profile',[ProfileController::class, 'edit'])->name('mypage.profile');//マイページ編集
         Route::get('/sell', [SellController::class, 'create'])->name('sell');//出品
-        Route::get('/item/{item_id}', [ItemController::class, 'show']);//商品詳細
+        Route::get('/item/{item}', [ItemController::class, 'show'])->name('items.show');//商品詳細
+        Route::post('/item/{item}/comment', [CommentController::class, 'store'])
+        ->name('items.comment');
 
 });

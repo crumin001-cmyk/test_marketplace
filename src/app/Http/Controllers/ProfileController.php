@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
     //初回プロフィール入力画面
-    public function firstLogin()    
+    public function firstlogin()
     {
-        return view('firstlogin');
+        $user = Auth::user();
+        return view('firstlogin',compact('user'));
     }
 
     //初回プロフィール保存
@@ -17,10 +19,13 @@ class ProfileController extends Controller
     {        
         return redirect()->route('items.index');
     }
+
+
     //マイページ
     public function mypage()
     {
-        return view('mypage');
+        $user = Auth::user();
+        return view('mypage',compact('user'));
     }
     // プロフィール編集画面
     //public function edit()

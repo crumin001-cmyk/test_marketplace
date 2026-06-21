@@ -18,16 +18,19 @@
     @foreach($items as $item)
         <div class="item-card">
             @if($item->sold_at)
-            <span class="sold">Sold</span>//購入済ならSold表示
+            <span class="sold">Sold</span>
             @endif
 
             <div class="item-box">
                 @if($item->image_path)
+                <a href="{{ route('items.show', $item->id) }}">
                     <img
                         class="item-image"
                         src="{{ asset('storage/' . $item->image_path) }}"
                         alt="{{ $item->name }}"
                     >
+                </a>
+
                 @else
                     <p class="no-image-text">商品画像</p>
                 @endif

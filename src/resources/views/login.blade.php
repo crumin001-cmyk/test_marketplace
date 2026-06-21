@@ -9,11 +9,11 @@
 <div class="login-container">
     <div class="login-box">
         <h2>ログイン</h2>
-        <form method="POST" action="{{ route('login') }}">
+        <form method="POST" action="{{ route('login') }}" novalidate>
             @csrf
             <div class="form-group">
                 <label>メールアドレス</label>
-                <input type="email" name="email" id="email">
+                <input type="text" name="email" id="email">
                 @error('email')
                     <p class="error">{{ $message }}</p>
                 @enderror
@@ -23,8 +23,7 @@
                 <input type="password" name="password">
                 @error('password')
                     <p class="error">{{ $message }}</p>
-                 @enderror
-
+                @enderror
             </div>
             <button type="submit">ログインする</button>
         </form>

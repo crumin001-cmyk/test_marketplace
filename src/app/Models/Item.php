@@ -4,7 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Favorite;
+use App\Models\User;
+use App\Models\Category;
+use App\Models\Condition;
 
 class Item extends Model
 {
@@ -23,4 +25,17 @@ class Item extends Model
     {
         return $this->belongsToMany(User::class, 'favorite');
     }
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
+
+    public function condition()
+    {
+        return $this->belongsTo(Condition::class);
+    }
+    //public function comments()
+    //{
+       // return $this->hasMany(Comment::class);
+    //}
 }
