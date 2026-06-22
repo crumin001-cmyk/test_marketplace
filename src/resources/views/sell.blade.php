@@ -1,6 +1,7 @@
 @extends('layouts.app2')
 
 @section('css')
+<link rel="stylesheet" href="{{ asset('css/reset.css') }}">
 <link rel="stylesheet" href="{{ asset('css/sell.css') }}">
 @endsection
 
@@ -71,7 +72,10 @@
             <textarea name="description" rows="5"></textarea>
 
             <label>販売価格</label>
-            <input type="number" name="price">
+            <div class="price-wrapper">
+                <span class="yen">¥</span>
+                <input type="number" name="price">
+            </div>
         </div>
 
         <button type="submit" class="submit-btn">
