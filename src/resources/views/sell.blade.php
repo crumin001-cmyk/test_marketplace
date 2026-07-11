@@ -22,6 +22,25 @@
                 <label for="image" class="upload-btn">
                     画像を選択する
                 </label>
+                <img id="preview" src="">
+                <script>
+                document.getElementById('image').addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    
+                    if (!file) return;
+                    
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(event) {
+                        const preview = document.getElementById('preview');
+                        preview.src = event.target.result;
+                        preview.style.display = 'block';
+                        document.querySelector('.upload-btn').style.display = 'none';
+                    };
+                    reader.readAsDataURL(file);
+                    });
+                </script>
+            
             </div>
 
             @error('image')
@@ -74,7 +93,11 @@
             <label>販売価格</label>
             <div class="price-wrapper">
                 <span class="yen">¥</span>
-                <input type="number" name="price">
+                <input type="number"
+                name="price"
+                min="0"
+                value="{{ old('price') }}"
+                >
             </div>
         </div>
 

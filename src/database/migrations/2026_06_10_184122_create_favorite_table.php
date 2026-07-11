@@ -14,7 +14,7 @@ class CreateFavoriteTable extends Migration
     public function up()
     {
         Schema::create('favorite', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
 
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             

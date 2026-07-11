@@ -18,6 +18,7 @@ class UserSeeder extends Seeder
             'name' => 'テストユーザー',
             'email' => 'test2@example.com',
             'password' => bcrypt('password'),
+            'email_verified_at' => now(),
         ]);
     }
 }

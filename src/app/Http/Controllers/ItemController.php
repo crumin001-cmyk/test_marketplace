@@ -25,7 +25,7 @@ class ItemController extends Controller
             $items->where('user_id', '!=', Auth::id());
         }
             
-            $items = $items->get();
+            $items = Item::all();
         }
     
     return view('items.index', compact('items', 'tab'));
@@ -42,14 +42,14 @@ class ItemController extends Controller
         return view('items.show', compact('item')); 
     } 
     
-    public function comments() 
-    {
-        return $this->hasMany(Comment::class); 
-    }
+    //public function comments() 
+    //{
+        //return $this->hasMany(Comment::class); 
+    //}
 
-    public function comment(Request $request, Item $item)
-    {
+    //public function comment(Request $request, Item $item)
+    //{
         //
-    }
+    //}
 
 }

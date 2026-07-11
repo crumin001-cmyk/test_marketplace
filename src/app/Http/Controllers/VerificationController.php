@@ -18,4 +18,10 @@ class VerificationController extends Controller
 
     return redirect()->route('firstLogin');
     }
+    public function resend(Request $request)
+    {
+        $request->user()->sendEmailVerificationNotification();
+
+        return back()->with('status', 'verification-link-sent');
+    }
 }

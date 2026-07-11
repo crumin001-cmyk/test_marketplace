@@ -12,16 +12,35 @@
 
     <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
         @csrf
-    </form>
     
         <div class="image-area">
-            <div class="profile-icon"></div>
+            <div class="profile-icon">
+
+            </div>
 
             <input type="file" name="image" id="image" hidden>
 
             <label for="image" class="image-btn">
                 画像を選択する
             </label>
+            <img id="preview" src="" alt="">
+            <script>
+                document.getElementById('image').addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    if (!file) return;
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(event) {
+                        const preview = document.getElementById('preview');
+                        preview.src = event.target.result;
+                        preview.style.display = 'block';
+                        document.querySelector('.image-btn').style.display = 'none';
+                    };
+
+                    reader.readAsDataURL(file);
+                });
+            </script>
+
         </div>
 
         <div class="form-group">
@@ -37,8 +56,8 @@
             <label>郵便番号</label>
             <input
                 type="text"
-                name="postcode"
-                value="{{ old('postcode', $user->postcode ?? '') }}"
+                name="postal_code"
+                value="{{ old('postal_code', $user->postal_code ?? '') }}"
             >
         </div>
 

@@ -20,6 +20,8 @@ class CreatePurchasesTable extends Migration
             
             $table->foreignId('item_id')->constrained()->cascadeOnDelete();
 
+            $table->unique(['item_id']);
+
             $table->timestamps();
         });
     }

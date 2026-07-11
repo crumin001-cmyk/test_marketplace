@@ -17,29 +17,44 @@ class ProfileController extends Controller
     //初回プロフィール保存
     public function store(Request $request)
     {        
+        $user = auth()->user();
+        $user->name = $request->input('name');
+        $user->postal_code = $request->input('postal_code');
+        $user->address =$request->input('address');
+        $user->building =$request->input('building');
+
+        $user->save();
         return redirect()->route('items.index');
     }
 
 
-    //マイページ
-    public function mypage()
+    //マイページ画面_出品購入した商品一覧
+    public function mypage(Request $request)
     {
         $user = Auth::user();
-        return view('mypage',compact('user'));
+        $page = $request->query('page', 'sell');
+        
+        return view('mypage',compact('user','page'));
     }
     // プロフィール編集画面
-    //public function edit()
-    //{
-        //$user = auth()->user();
-        //return view('mypage.profile', ['user' => $user]);
-    //}
-    // 更新処理
-    //public function update(Request $request)
-    //{
-        //$user = auth()->user();
-        //$user->name = $request->input('name');
-        //$user->save();
+    public function edit()
+    {
+        $user = auth()->user();
 
-        //return redirect('/mypage/profile')->with('message', 'プロフィールを更新しました。');
-    //}
+        return view('profile', compact('user'));
+
+    }
+    // 更新処理
+    public function update(Request $request)
+    {
+        $user = auth()->user();
+        $user->name = $request->input('name');
+        $user->postal_code = $request->input('postal_code');
+        $user->address =$request->input('address');
+        $user->building =$request->input('building');
+
+        $user->save();
+
+        return redirect('mypage')->with('message', 'プロフィールを更新しました。');
+    }
 }

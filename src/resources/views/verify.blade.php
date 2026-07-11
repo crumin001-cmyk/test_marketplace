@@ -19,10 +19,20 @@
     </div>
     
     <div class="form-link">
-        <div class="form-link" onclick="event.preventDefault(); document.getElementById('resend-form').submit();">
-            認証メールを再送しました。
-        </div>
+        @if (session('status') === 'verification-link-sent')
+    <p>認証メールを再送しました。</p>
+    @else
+        <a href="#" 
+        onclick="event.preventDefault(); document.getElementById('resend-form').submit();">
+            認証メールを再送する
+        </a>
+    @endif
     </div>
+    <form id="resend-form" action="{{ route('verification.send') }}"
+            method="POST" 
+            style="display: none;">
+        @csrf
+    </form>
 </div>
 
 @endsection

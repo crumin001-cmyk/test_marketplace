@@ -32,7 +32,7 @@
 
             {{-- ブランド名 --}}
             <p class="brand-name">
-            {{ $item->brand }}
+            {{ $item->brand?->name }}
             </p>
 
             {{-- 価格 --}}
@@ -43,18 +43,14 @@
             {{-- いいね--}}
             <div class="icon_area">
                 <img src="{{ asset('storage/ハートロゴ_デフォルト.png') }}" 
-                alt="COACHTECH"
                 id="site-logo"
                 onclick="changeLogo()">
-
-                <img src="{{ asset('storage/ふきだしロゴ.png') }}" alt="COACHTECH">
                 
                 <p>0</p>
             </div>
             {{-- コメント --}}
             <div class="comment-area">
-                <img src="{{ asset('storage/comment.png') }}" 
-                alt="コメント">
+                <img src="{{ asset('storage/ふきだしロゴ.png') }}" >
 
                 <p>0</p>
             </div>    
@@ -69,8 +65,10 @@
                     }
                 }
             </script>
-             
-            <button type="submit" class="buy-button">購入手続きへ</button>
+            <a href="{{ route('purchase.show', ['item_id' => $item->id]) }}" class="buy-button">
+                購入手続きへ
+            </a>
+
             <h3>商品説明</h3>
             <p class="description">
                 {{ $item->description }}

@@ -20,18 +20,18 @@
                 : asset('images/default.png') }}" alt="">
             </label>
 
-        <a href="{{ route('mypage.profile') }}" class="edit-btn">
+        <a href="{{ route('profile.edit') }}" class="edit-btn">
             プロフィールを編集
         </a>
     </div>
 
     {{-- タブ --}}
-    <div class="tab-menu">
-        <a href="?tab=sell" class="tab-link active">
+    <div class="page-menu">
+        <a href="?page=sell" class="tab-link active">
             出品した商品
         </a>
 
-        <a href="?tab=buy" class="tab-link">
+        <a href="?page=buy" class="tab-link">
             購入した商品
         </a>
     </div>
