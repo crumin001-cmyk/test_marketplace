@@ -19,9 +19,21 @@ class PurchaseController extends Controller
 
     public function store(Request $request, $item_id)
     {
+        $item = Item::findOrFail($item_id);
+        // すでに購入済みなら
+        if ($item->sold_at) {
+            return redirect()
+            ->route('items.show', $item->id)
+            ->with('message', 'この商品は購入済みです。');
+        }
+
         Purchase::create([
             'user_id' => Auth::id(),
             'item_id' => $item_id,
+        ]);
+        // Sold状態にする
+        $item->update([
+        'sold_at' => now(),
         ]);
 
         return redirect()->route('items.index')

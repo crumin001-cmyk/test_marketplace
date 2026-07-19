@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Item;
+use App\Models\Purchase;
 
 class ProfileController extends Controller
 {
@@ -22,7 +24,6 @@ class ProfileController extends Controller
         $user->postal_code = $request->input('postal_code');
         $user->address =$request->input('address');
         $user->building =$request->input('building');
-
         $user->save();
         return redirect()->route('items.index');
     }
@@ -34,8 +35,22 @@ class ProfileController extends Controller
         $user = Auth::user();
         $page = $request->query('page', 'sell');
         
-        return view('mypage',compact('user','page'));
+        $items = collect();
+        
+        if ($page === 'sell') {
+            //出品した商品
+        $items = Item::where('user_id', $user->id)->get();
+    } elseif ($page === 'buy') {
+        //購入した商品
+        $items = Item::whereHas('purchase', function ($query) use ($user) {
+            $query->where('user_id', $user->id);
+        })->get();
+    } else {
+        $items = collect();
     }
+    return view('mypage', compact('user', 'page', 'items'));
+    }
+
     // プロフィール編集画面
     public function edit()
     {
@@ -57,4 +72,6 @@ class ProfileController extends Controller
 
         return redirect('mypage')->with('message', 'プロフィールを更新しました。');
     }
+
+    
 }

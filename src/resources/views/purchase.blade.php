@@ -6,6 +6,20 @@
 
 @section('content')
 <div class="purchase-container">
+    {{-- 左の画像 --}}
+        <div class="item-image-area">
+            
+                @if($item->image_path)
+                <img src="{{ asset('storage/' . $item->image_path) }}"
+                alt="商品画像"
+                class="item-image">
+                @else
+                <div class="no-image">
+                    商品画像
+                </div>
+                @endif
+            </a>
+        </div>
 
     {{-- 左側 --}}
     <div class="purchase-left">

@@ -31,5 +31,7 @@ class CategorySeeder extends Seeder
             ['name' => 'おもちゃ'],
             ['name' => 'ベビー・キッズ'],
         ]);
+
+        
     }
 }

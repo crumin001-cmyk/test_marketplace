@@ -9,7 +9,7 @@ class ItemSeeder extends Seeder
 {
     public function run(): void
     {
-        Item::create([
+        $item= Item::create([
             'user_id' =>1,
             'name' => '腕時計',
             'price' => 15000,
@@ -19,7 +19,9 @@ class ItemSeeder extends Seeder
             'condition_id' => 1,
             ]);
 
-        Item::create([
+            $item->categories()->attach([5, 12]);
+
+        $item= Item::create([
             'user_id' =>1,
             'name' => 'HDD',
             'price' => 5000,
@@ -29,7 +31,9 @@ class ItemSeeder extends Seeder
             'condition_id' => 2,
             ]);
 
-        Item::create([
+            $item->categories()->attach([2, 8]);
+
+        $item= Item::create([
             'user_id' =>1,
             'name' => '玉ねぎ3束',
             'price' => 300,
@@ -39,7 +43,9 @@ class ItemSeeder extends Seeder
             'condition_id' => 3,
             ]);
 
-        Item::create([
+            $item->categories()->attach([10]);
+
+        $item= Item::create([
             'user_id' =>1,
             'name' => '革靴',
             'price' => 4000,
@@ -49,7 +55,9 @@ class ItemSeeder extends Seeder
             'condition_id' => 4,
             ]);
 
-        Item::create([
+            $item->categories()->attach([1, 5]);
+
+        $item= Item::create([
             'user_id' =>1,
             'name' => 'ノートPC',
             'price' => 45000,
@@ -59,7 +67,9 @@ class ItemSeeder extends Seeder
             'condition_id' => 1,
             ]);
 
-        Item::create([
+            $item->categories()->attach([2]);
+
+        $item= Item::create([
             'user_id' =>1,
             'name' => 'マイク',
             'price' => 8000,
@@ -69,7 +79,9 @@ class ItemSeeder extends Seeder
             'condition_id' => 2,
             ]);
 
-        Item::create([
+            $item->categories()->attach([2, 8]);
+
+        $item= Item::create([
             'user_id' =>1,
             'name' => 'ショルダーバッグ',
             'price' => 3500,
@@ -79,7 +91,9 @@ class ItemSeeder extends Seeder
             'condition_id' => 3,
             ]);
 
-        Item::create([
+            $item->categories()->attach([4, 1]);
+
+        $item= Item::create([
             'user_id' =>1,
             'name' => 'タンブラー',
             'price' => 500,
@@ -89,7 +103,9 @@ class ItemSeeder extends Seeder
             'condition_id' => 4,
             ]);
 
-        Item::create([
+            $item->categories()->attach([10, 3]);
+
+        $item= Item::create([
             'user_id' =>1,
             'name' => 'コーヒーミル',
             'price' => 4000,
@@ -99,7 +115,9 @@ class ItemSeeder extends Seeder
             'condition_id' => 1,
             ]);
 
-        Item::create([
+            $item->categories()->attach([10, 3]);
+
+        $item= Item::create([
             'user_id' =>1,
             'name' => 'メイクセット',
             'price' => 2500,
@@ -108,6 +126,8 @@ class ItemSeeder extends Seeder
             'image_path' => 'items/%E5%A4%96%E5%87%BA%E3%83%A1%E3%82%A4%E3%82%AF%E3%82%A2%E3%83%83%E3%83%95%E3%82%9A%E3%82%BB%E3%83%83%E3%83%88.jpg',
             'condition_id' => '2',
             ]);
+
+            $item->categories()->attach([6, 4]);
 
     }
 }

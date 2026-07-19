@@ -39,6 +39,7 @@ class ItemController extends Controller
 
     public function show(Item $item) 
     {
+        $item->load('comments.user');
         return view('items.show', compact('item')); 
     } 
     

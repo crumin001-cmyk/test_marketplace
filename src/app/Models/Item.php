@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Models\Category;
 use App\Models\Condition;
 use App\Models\Brand;
-//use App\Models\Comment;
+use App\Models\Comment;
 
 class Item extends Model
 {
@@ -46,8 +46,8 @@ class Item extends Model
         return $this->hasOne(Purchase::class);
     }
 
-    //public function comments()
-    //{
-       // return $this->hasMany(Comment::class);
-    //}
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

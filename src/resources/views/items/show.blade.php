@@ -46,13 +46,13 @@
                 id="site-logo"
                 onclick="changeLogo()">
                 
-                <p>0</p>
+                <p>{{ $item->comments->count() }}</p>
             </div>
             {{-- コメント --}}
             <div class="comment-area">
                 <img src="{{ asset('storage/ふきだしロゴ.png') }}" >
 
-                <p>0</p>
+                <p>{{ $item->comments->count() }}</p>
             </div>    
             <script>
                 function changeLogo() {
@@ -65,9 +65,15 @@
                     }
                 }
             </script>
+            @if(!$item->sold_at)
             <a href="{{ route('purchase.show', ['item_id' => $item->id]) }}" class="buy-button">
                 購入手続きへ
             </a>
+            @else
+            <div class="sold">
+                    Sold
+            </div>
+            @endif
 
             <h3>商品説明</h3>
             <p class="description">
@@ -90,14 +96,31 @@
         
             </div>
 
-            <h3>コメント</h3>
+            <h3>コメント({{ $item->comments->count() }})</h3>
+            
+            @foreach($item->comments as $comment)
             <div class="comment">
-                <p class="comment-user">admin</p>
-                <p class="comment-body">こちらにコメントが入ります。</p>
+                <img
+                    src="{{ $comment->user->image
+                    ? Storage::url($comment->user->image)
+                    : asset('images/default.png') }}"
+                    alt=""
+                >
+
+                <p class="comment-user">{{ $comment->user->name }}</p>
+
+                <p class="comment-body">
+                    {{ $comment->content }}
+                </p>
             </div>
+            @endforeach
+
+            <h4>商品へのコメント</h4>
+
             <form action="{{ $item->id }}" method="POST">
             @csrf
-            <textarea name="comment">商品へのコメント</textarea>
+
+            <textarea name="comment" class="comment-input"></textarea>
 
             <button type="submit">コメントを送信する</button>
         </div>

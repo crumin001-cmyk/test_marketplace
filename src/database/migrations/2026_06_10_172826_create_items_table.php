@@ -20,7 +20,7 @@ class CreateItemsTable extends Migration
             $table->text('description')->nullable();
             $table->unsignedInteger('price');
             $table->string('image_path');
-            $table->foreignId('brand_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('brand_id')->nullable()->constrained()->cascadeOnDelete();
             $table->foreignId('condition_id')->constrained()->cascadeOnDelete();
             $table->timestamp('sold_at')->nullable();
             $table->timestamps();
