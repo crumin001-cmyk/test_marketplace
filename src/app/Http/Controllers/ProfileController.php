@@ -18,12 +18,14 @@ class ProfileController extends Controller
 
     //初回プロフィール保存
     public function store(Request $request)
-    {        
+    {
+        $image_path=$request->image->store('upload_users','public');
         $user = auth()->user();
         $user->name = $request->input('name');
         $user->postal_code = $request->input('postal_code');
         $user->address =$request->input('address');
         $user->building =$request->input('building');
+        $user->image =$image_path;
         $user->save();
         return redirect()->route('items.index');
     }
@@ -62,12 +64,13 @@ class ProfileController extends Controller
     // 更新処理
     public function update(Request $request)
     {
+        $image_path=$request->image->store('upload_users','public');
         $user = auth()->user();
         $user->name = $request->input('name');
         $user->postal_code = $request->input('postal_code');
         $user->address =$request->input('address');
         $user->building =$request->input('building');
-
+        $user->image =$image_path;
         $user->save();
 
         return redirect('mypage')->with('message', 'プロフィールを更新しました。');

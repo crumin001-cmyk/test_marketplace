@@ -14,7 +14,7 @@
 
          {{-- ロゴ --}}
          <div class="header-logo">
-            <img src="{{ asset('storage/COACHTECHヘッダーロゴ (4).png') }}" class="logo">
+            <img src="{{ asset('images/COACHTECHヘッダーロゴ.png') }}" class="logo">
         </div>
 
         {{-- 検索フォーム --}}

@@ -11,7 +11,7 @@
 
 <body class="body">
     <header class="header">
-        <img src="{{ asset('storage/COACHTECHヘッダーロゴ (4).png') }}" class="logo">
+        <img src="{{ asset('images/COACHTECHヘッダーロゴ.png') }}" class="logo">
         @yield('header')
     </header>
 <main>

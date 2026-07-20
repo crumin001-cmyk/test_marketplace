@@ -13,7 +13,7 @@
         <div class="profile-icon-area">
             <input type="file" 
             id="profile_image" 
-            name="profile_image"
+            name="image"
             hidden
             >
             <label for="profile_image" class="circle-icon">

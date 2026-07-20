@@ -42,7 +42,7 @@
             </p>
             {{-- いいね--}}
             <div class="icon_area">
-                <img src="{{ asset('storage/ハートロゴ_デフォルト.png') }}" 
+                <img src="{{ asset('images/ハートロゴ_デフォルト.png') }}" 
                 id="site-logo"
                 onclick="changeLogo()">
                 
@@ -50,7 +50,7 @@
             </div>
             {{-- コメント --}}
             <div class="comment-area">
-                <img src="{{ asset('storage/ふきだしロゴ.png') }}" >
+                <img src="{{ asset('images/ふきだしロゴ.png') }}" >
 
                 <p>{{ $item->comments->count() }}</p>
             </div>    
@@ -59,9 +59,9 @@
                     const logo = document.getElementById('site-logo');
                     // 現在の画像名に logo1 が含まれているか判定
                     if (logo.src.includes('ハートロゴ_デフォルト.png')) {
-                        logo.src = "{{ asset('storage/ハートロゴ_ピンク.png') }}";
+                        logo.src = "{{ asset('images/ハートロゴ_ピンク.png') }}";
                     } else {
-                        logo.src = "{{ asset('storage/ハートロゴ_デフォルト.png') }}";
+                        logo.src = "{{ asset('images/ハートロゴ_デフォルト.png') }}";
                     }
                 }
             </script>
