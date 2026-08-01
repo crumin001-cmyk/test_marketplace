@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Category;
 use App\Models\Condition;
-use App\Models\Brand;
 use App\Models\Comment;
 
 class Item extends Model
@@ -19,21 +18,17 @@ class Item extends Model
         'description',
         'price',
         'image_path',
-        'brand_id',
+        'brand',
         'condition_id',
         'sold_at',
     ];
     public function favoriteUsers()
     {
-        return $this->belongsToMany(User::class, 'favorite');
+        return $this->belongsToMany(User::class, 'favorites');
     }
     public function categories()
     {
         return $this->belongsToMany(Category::class);
-    }
-    public function brand()
-    {
-        return $this->belongsTo(Brand::class, 'brand_id');
     }
 
     public function condition()

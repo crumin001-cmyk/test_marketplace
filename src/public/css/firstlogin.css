@@ -1,0 +1,185 @@
+/* ======================================
+プロフィール設定画面
+====================================== */
+
+.firstlogin-container {
+    width: 100%;
+    max-width: 1540px;
+    margin: 0 auto;
+    padding: 70px 20px;
+    box-sizing: border-box;
+}
+
+.firstlogin-box {
+    width: 100%;
+    max-width: 620px;
+    margin: 0 auto;
+}
+
+.firstlogin-box h2 {
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 50px;
+}
+
+/* ======================================
+プロフィール画像
+====================================== */
+
+.profile-icon-area {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 45px;
+}
+
+.circle-icon,
+#preview {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
+
+#preview {
+    display: none;
+    object-fit: cover;
+    border: 1px solid #ccc;
+}
+
+.circle-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #d9d9d9;
+    color: transparent;
+    overflow: hidden;
+    position: relative;
+}
+
+.circle-icon::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: #d9d9d9;
+}
+
+/* 画像選択ボタン */
+
+label[for="profile_image"] {
+    display: inline-block;
+    padding: 8px 20px;
+
+    border: 2px solid #fff;
+    border-radius: 8px;
+
+    color: #fff;
+    background: #fff;
+
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* ======================================
+フォーム
+====================================== */
+
+form label:not([for="profile_image"]) {
+    display: block;
+    margin-bottom: 8px;
+
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.input {
+    width: 100%;
+    height: 58px;
+
+    margin-bottom: 30px;
+    padding: 0 15px;
+    box-sizing: border-box;
+
+    border: 1px solid #888;
+    border-radius: 4px;
+
+    font-size: 18px;
+}
+
+.input:focus {
+    outline: none;
+    border-color: #ff5555;
+}
+
+/* ======================================
+更新ボタン
+====================================== */
+
+.update-btn {
+    width: 100%;
+    height: 60px;
+
+    margin-top: 20px;
+
+    border: none;
+    border-radius: 4px;
+
+    background: #ff5555;
+    color: #fff;
+
+    font-size: 24px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.update-btn:hover {
+    background: #ff4444;
+}
+
+/* ======================================
+PCレスポンシブ
+1400px～1540px
+====================================== */
+
+@media screen and (min-width: 1400px) and (max-width: 1540px) {
+    .firstlogin-container {
+        padding: 60px 40px;
+    }
+
+    .firstlogin-box {
+        max-width: 580px;
+    }
+
+    .firstlogin-box h2 {
+        font-size: 34px;
+    }
+
+    .circle-icon,
+    #preview {
+        width: 110px;
+        height: 110px;
+    }
+
+    label[for="profile_image"] {
+        font-size: 15px;
+        padding: 7px 18px;
+    }
+
+    form label:not([for="profile_image"]) {
+        font-size: 20px;
+    }
+
+    .input {
+        height: 54px;
+        font-size: 17px;
+    }
+
+    .update-btn {
+        height: 56px;
+        font-size: 22px;
+    }
+}

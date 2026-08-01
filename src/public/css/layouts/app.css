@@ -1,0 +1,30 @@
+/* ヘッダー全体 */
+header {
+    width: 100%;
+    background: #000;
+}
+
+/* 中身 */
+.header-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 8px 20px;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+/* ロゴ */
+.header-logo {
+    width: 300px;
+    max-width: 30%;
+    height: auto;
+}
+
+@media screen and (min-width: 1400px) and (max-width: 1540px) {
+    .header-inner {
+        padding: 0 40px;
+    }
+}

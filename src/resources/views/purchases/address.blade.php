@@ -1,7 +1,7 @@
 @extends('layouts.app2')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/address-edit.css') }}">
+<link rel="stylesheet" href="{{ asset('css/address.css') }}">
 @endsection
 
 @section('content')
@@ -18,10 +18,9 @@
                 type="text"
                 id="postal_code"
                 name="postal_code"
-                value="{{ old('postal_code', $user->postal_code) }}"
-            >
+                value="{{ old('postal_code', $user->postal_code) }}">
             @error('postal_code')
-                <p class="error">{{ $message }}</p>
+            <p class="error">{{ $message }}</p>
             @enderror
         </div>
 
@@ -31,10 +30,9 @@
                 type="text"
                 id="address"
                 name="address"
-                value="{{ old('address', $user->address) }}"
-            >
+                value="{{ old('address', $user->address) }}">
             @error('address')
-                <p class="error">{{ $message }}</p>
+            <p class="error">{{ $message }}</p>
             @enderror
         </div>
 
@@ -44,10 +42,9 @@
                 type="text"
                 id="building"
                 name="building"
-                value="{{ old('building', $user->building) }}"
-            >
+                value="{{ old('building', $user->building) }}">
             @error('building')
-                <p class="error">{{ $message }}</p>
+            <p class="error">{{ $message }}</p>
             @enderror
         </div>
 

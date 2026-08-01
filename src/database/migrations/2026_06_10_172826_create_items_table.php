@@ -20,7 +20,7 @@ class CreateItemsTable extends Migration
             $table->text('description')->nullable();
             $table->unsignedInteger('price');
             $table->string('image_path');
-            $table->foreignId('brand_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->string('brand')->nullable();
             $table->foreignId('condition_id')->constrained()->cascadeOnDelete();
             $table->timestamp('sold_at')->nullable();
             $table->timestamps();
@@ -29,9 +29,9 @@ class CreateItemsTable extends Migration
 
     public function favoritedUsers()
     {
-        return $this->belongsToMany(Item::class, 'favorite');
+        return $this->belongsToMany(Item::class, 'favorites');
     }
-    
+
     /**
      * Reverse the migrations.
      *

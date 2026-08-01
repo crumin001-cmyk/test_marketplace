@@ -1,0 +1,130 @@
+/* 全体 */
+.mypage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 150px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    box-sizing: border-box;
+}
+
+/* プロフィール */
+.profile-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 150px;
+}
+
+.profile-icon {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #d9d9d9;
+}
+
+.user-name {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.edit-btn {
+    display: inline-block;
+    padding: 10px 22px;
+    border: 2px solid #ff5555;
+    border-radius: 5px;
+    color: #ff5555;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.edit-btn:hover {
+    background: #fff2f2;
+}
+
+/* タブ */
+.tab-menu {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+
+    display: flex;
+    gap: 30px;
+
+    padding: 20px 40px 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.tab-text {
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.tab-text.active {
+    color: red;
+}
+
+.item-list {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+
+    gap: 20px;
+    padding: 20px 40px;
+}
+
+.item-card {
+    flex: 0 1 300px;
+    max-width: 300px;
+}
+
+.item-card a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.item-box {
+    position: relative;
+    overflow: hidden;
+}
+
+.sold {
+    position: absolute;
+    top: 18px;
+    left: -35px;
+    width: 140px;
+
+    background: rgba(255, 0, 0, 0.8);
+    color: #fff;
+
+    text-align: center;
+    font-weight: bold;
+    transform: rotate(-45deg);
+    padding: 6px 0;
+}
+
+.item-image {
+    width: 100%;
+    height: auto;
+    background-color: #ddd;
+    object-fit: cover;
+    display: block;
+    font-size: 28px;
+    color: #333;
+}
+
+.item-name {
+    margin-top: 10px;
+    font-size: 14px;
+}

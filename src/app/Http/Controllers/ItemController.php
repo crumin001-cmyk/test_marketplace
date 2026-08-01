@@ -11,46 +11,35 @@ class ItemController extends Controller
     public function index(Request $request)
     {
         $tab = $request->query('tab', 'recommend');
-        
+
         if ($tab === 'mylist') {
+
+            if (!Auth::check()) {
+                return redirect()->route('login');
+            }
+
             $items = Item::whereHas('favoriteUsers', function ($query) {
-                $query->where('user_id', auth()->id());
-                })->get();
-                
+                $query->where('user_id', Auth::id());
+            })->get();
         } else {
 
-        $items = Item::query();
-        //自分の商品は除外する
-        if (Auth::check()) {
-            $items->where('user_id', '!=', Auth::id());
+            $items = Item::query();
+
+            // ログイン中のみ自分の商品を除外
+            if (Auth::check()) {
+                $items->where('user_id', '!=', Auth::id());
+            }
+
+            $items = $items->get();
         }
-            
-            $items = Item::all();
-        }
-    
-    return view('items.index', compact('items', 'tab'));
+
+        return view('items.index', compact('items', 'tab'));
     }
 
-    public function favorite($item_id)
+
+    public function show(Item $item)
     {
-        Auth::user()->favorite()->syncWithoutDetaching([$item_id]);
-        return back();
+        $item->load('favoriteUsers');
+        return view('items.show', compact('item'));
     }
-
-    public function show(Item $item) 
-    {
-        $item->load('comments.user');
-        return view('items.show', compact('item')); 
-    } 
-    
-    //public function comments() 
-    //{
-        //return $this->hasMany(Comment::class); 
-    //}
-
-    //public function comment(Request $request, Item $item)
-    //{
-        //
-    //}
-
 }

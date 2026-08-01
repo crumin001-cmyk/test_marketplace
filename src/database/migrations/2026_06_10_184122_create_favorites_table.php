@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFavoriteTable extends Migration
+class CreateFavoritesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,16 @@ class CreateFavoriteTable extends Migration
      */
     public function up()
     {
-        Schema::create('favorite', function (Blueprint $table) {
+        Schema::create('favorites', function (Blueprint $table) {
             $table->bigIncrements('id');
 
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            
+
             $table->foreignId('item_id')->constrained()->cascadeOnDelete();
 
             $table->timestamps();
+
+            $table->unique(['user_id', 'item_id']); //ユニークキー
         });
     }
 

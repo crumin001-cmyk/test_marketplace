@@ -1,0 +1,87 @@
+/* ヘッダー全体 */
+header {
+    width: 100%;
+    background: #000;
+}
+
+/* ヘッダーの中身 */
+.header-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 8px 20px;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+/* ロゴ */
+.header-logo {
+    width: 300px;
+    max-width: 30%;
+    height: auto;
+}
+
+/* 検索フォーム */
+.header-search {
+    flex: 1;
+    max-width: 400px;
+    margin-left: 0;
+}
+
+.header-search input {
+    width: 100%;
+    height: 36px;
+    padding: 0 12px;
+    border: none;
+    border-radius: 4px;
+}
+
+/* 右側メニュー */
+/* ナビゲーション */
+.nav-list {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.header-nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+}
+/* ログアウト・マイページ */
+.header-link,
+.logout {
+    color: #fff;
+    font-size: 14px;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font: inherit;
+    padding: 0;
+    margin-left: 5px;
+}
+
+/* 出品ボタン */
+.sell-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #fff;
+    color: #000 !important; /* 文字を必ず黒にする */
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 5px;
+}
+@media screen and (min-width: 1400px) and (max-width: 1540px) {
+    .header-inner {
+        padding: 0 40px;
+    }
+}

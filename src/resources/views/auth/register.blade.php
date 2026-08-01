@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/reset.css') }}">
 <link rel="stylesheet" href="{{ asset('css/register.css') }}">
 @endsection
 
@@ -21,7 +20,7 @@
                 @enderror
             </div>
 
-            <div class="form-group">    
+            <div class="form-group">
                 <label>メールアドレス</label>
                 <input type="email" id="email" name="email" value="{{ old('email') }}">
                 @error('email')

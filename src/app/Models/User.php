@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Comment;
+use App\Models\Item;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -45,9 +47,16 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    public function comments()
-{
-    return $this->hasMany(Comment::class);
-}
+    public function favoriteItems()
+    {
+        return $this->belongsToMany(
+            Item::class,
+            'favorites'
+        );
+    }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

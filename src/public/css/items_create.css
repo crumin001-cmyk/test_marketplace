@@ -1,0 +1,152 @@
+/* 全体 */
+.sell-container {
+    width: 500px;
+    margin: 40px auto 80px;
+}
+
+.page-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+/* セクション */
+.form-section {
+    margin-bottom: 40px;
+}
+
+.sub-title {
+    font-size: 22px;
+    color: #666;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 8px;
+    margin-bottom: 25px;
+}
+
+/* ラベル */
+.form-section label,
+.section-title {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* 画像アップロード */
+.image-upload {
+    width: 100%;
+    height: 150px;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background: #fff;
+}
+
+.upload-btn {
+    display: inline-block;
+    padding: 8px 18px;
+    border: 2px solid #ff5a5f;
+    color: #ff5a5f;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    background: #fff;
+}
+
+.upload-btn:hover {
+    background: #ff5a5f;
+    color: #fff;
+}
+
+#preview {
+    display: none;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* カテゴリー */
+.category-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 15px 0 30px;
+}
+
+.category-tag input {
+    display: none;
+}
+
+.category-tag span {
+    display: inline-block;
+    padding: 5px 15px;
+    border: 1px solid #ff5a5f;
+    color: #ff5a5f;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: 0.2s;
+}
+
+.category-tag input:checked + span {
+    background: #ff5a5f;
+    color: #fff;
+}
+
+/* 入力欄 */
+.sell-container input[type="text"],
+.sell-container input[type="number"],
+.sell-container select,
+.sell-container textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #bbb;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+/* 金額 */
+.price-wrapper {
+    position: relative;
+}
+
+.yen {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.price-wrapper input {
+    padding-left: 28px;
+}
+
+/* ボタン */
+.submit-btn {
+    width: 100%;
+    padding: 14px;
+    background: #ff5a5f;
+    color: #fff;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    opacity: 0.9;
+}
+
+/* エラー */
+.error {
+    color: red;
+    font-size: 13px;
+    margin-top: 5px;
+}

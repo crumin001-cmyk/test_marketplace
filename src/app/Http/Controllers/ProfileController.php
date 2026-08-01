@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Item;
-use App\Models\Purchase;
+use App\Http\Requests\ProfileRequest;
 
 class ProfileController extends Controller
 {
@@ -13,19 +13,22 @@ class ProfileController extends Controller
     public function firstlogin()
     {
         $user = Auth::user();
-        return view('firstlogin',compact('user'));
+        return view('firstlogin', compact('user'));
     }
 
     //初回プロフィール保存
-    public function store(Request $request)
+    public function store(ProfileRequest $request)
     {
-        $image_path=$request->image->store('upload_users','public');
         $user = auth()->user();
+
         $user->name = $request->input('name');
         $user->postal_code = $request->input('postal_code');
-        $user->address =$request->input('address');
-        $user->building =$request->input('building');
-        $user->image =$image_path;
+        $user->address = $request->input('address');
+        $user->building = $request->input('building');
+        if ($request->hasFile('image')) {
+            $image_path = $request->file('image')->store('upload_users', 'public');
+            $user->image = $image_path;
+        }
         $user->save();
         return redirect()->route('items.index');
     }
@@ -36,21 +39,21 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
         $page = $request->query('page', 'sell');
-        
+
         $items = collect();
-        
+
         if ($page === 'sell') {
             //出品した商品
-        $items = Item::where('user_id', $user->id)->get();
-    } elseif ($page === 'buy') {
-        //購入した商品
-        $items = Item::whereHas('purchase', function ($query) use ($user) {
-            $query->where('user_id', $user->id);
-        })->get();
-    } else {
-        $items = collect();
-    }
-    return view('mypage', compact('user', 'page', 'items'));
+            $items = Item::where('user_id', $user->id)->get();
+        } elseif ($page === 'buy') {
+            //購入した商品
+            $items = Item::whereHas('purchase', function ($query) use ($user) {
+                $query->where('user_id', $user->id);
+            })->get();
+        } else {
+            $items = collect();
+        }
+        return view('users.show', compact('user', 'page', 'items'));
     }
 
     // プロフィール編集画面
@@ -58,23 +61,22 @@ class ProfileController extends Controller
     {
         $user = auth()->user();
 
-        return view('profile', compact('user'));
-
+        return view('users.edit', compact('user'));
     }
     // 更新処理
-    public function update(Request $request)
+    public function update(ProfileRequest $request)
     {
-        $image_path=$request->image->store('upload_users','public');
         $user = auth()->user();
         $user->name = $request->input('name');
         $user->postal_code = $request->input('postal_code');
-        $user->address =$request->input('address');
-        $user->building =$request->input('building');
-        $user->image =$image_path;
+        $user->address = $request->input('address');
+        $user->building = $request->input('building');
+        if ($request->hasFile('image')) {
+            $image_path = $request->file('image')->store('upload_users', 'public');
+            $user->image = $image_path;
+        }
         $user->save();
 
         return redirect('mypage')->with('message', 'プロフィールを更新しました。');
     }
-
-    
 }

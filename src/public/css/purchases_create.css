@@ -1,0 +1,262 @@
+/* ======================================
+   購入画面
+====================================== */
+
+.purchase-container {
+    width: 100%;
+    max-width: 1540px;
+    margin: 50px auto 80px;
+    padding: 0 40px;
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 80px;
+}
+
+/* ======================================
+   左側
+====================================== */
+
+.purchase-left {
+    flex: 1;
+    max-width: 700px;
+}
+
+/* ======================================
+   商品情報
+====================================== */
+
+.item-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 35px;
+    margin-bottom: 35px;
+}
+
+.item-image {
+    width: 150px;
+    height: 150px;
+    flex-shrink: 0;
+}
+
+.item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.no-image {
+    width: 150px;
+    height: 150px;
+    background: #d9d9d9;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: #666;
+}
+
+.item-detail h2 {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.item-detail p {
+    font-size: 30px;
+}
+
+/* ======================================
+   区切り線
+====================================== */
+
+.purchase-left hr {
+    border: none;
+    border-top: 1px solid #999;
+    margin: 40px 0;
+}
+
+/* ======================================
+   支払い方法
+====================================== */
+
+.payment-section {
+    padding-left: 25px;
+}
+
+.payment-section h3 {
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.payment-section select {
+    width: 270px;
+    height: 36px;
+
+    padding: 0 10px;
+
+    border: 1px solid #999;
+    border-radius: 3px;
+
+    background: #fff;
+}
+
+/* ======================================
+   配送先
+====================================== */
+
+.address-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 30px;
+}
+
+.address-header h3 {
+    font-size: 20px;
+}
+
+.address-header a {
+    color: #0073e6;
+    text-decoration: none;
+}
+
+.address-info {
+    padding-left: 35px;
+}
+
+.address-info p {
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1.8;
+}
+
+/* ======================================
+   右側
+====================================== */
+
+.purchase-right {
+    width: 360px;
+    flex-shrink: 0;
+}
+
+/* ======================================
+   購入情報テーブル
+====================================== */
+
+.purchase-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 55px;
+
+    /* 外枠 */
+    border: 1px solid #888;
+}
+
+.purchase-table th,
+.purchase-table td {
+    height: 85px;
+    padding: 0 20px;
+
+    font-size: 20px;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+
+    /* 縦線削除 */
+    border-left: none;
+    border-right: none;
+
+    /* 横線 */
+    border-bottom: 1px solid #888;
+}
+
+.purchase-table tr:last-child th,
+.purchase-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* ======================================
+   購入ボタン
+====================================== */
+
+.purchase-btn {
+    width: 100%;
+    height: 56px;
+
+    border: none;
+    border-radius: 4px;
+
+    background: #ff5555;
+    color: #fff;
+
+    font-size: 22px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.purchase-btn:hover {
+    background: #ff4444;
+}
+
+/* ======================================
+   エラー
+====================================== */
+
+.error {
+    margin-top: 8px;
+    color: red;
+    font-size: 14px;
+}
+
+/* ======================================
+   PCレスポンシブ
+   1400px～1540px
+====================================== */
+
+@media screen and (min-width: 1400px) and (max-width: 1540px) {
+    .purchase-container {
+        padding: 0 40px;
+        gap: 60px;
+    }
+
+    .purchase-left {
+        max-width: 680px;
+    }
+
+    .purchase-right {
+        width: 340px;
+    }
+
+    .item-image {
+        width: 140px;
+        height: 140px;
+    }
+
+    .item-detail h2 {
+        font-size: 28px;
+    }
+
+    .item-detail p {
+        font-size: 28px;
+    }
+
+    .purchase-table th,
+    .purchase-table td {
+        font-size: 18px;
+        height: 80px;
+    }
+
+    .purchase-btn {
+        height: 54px;
+        font-size: 20px;
+    }
+}
