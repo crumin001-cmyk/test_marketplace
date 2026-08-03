@@ -58,7 +58,9 @@
                 <label class="category-tag">
                     <input type="checkbox"
                         name="categories[]"
-                        value="{{ $category->id }}">
+                        value="{{ $category->id }}"
+                        {{ in_array($category->id, old('categories', [])) ? 'checked' : '' }}>
+
                     <span>{{ $category->name }}</span>
                 </label>
                 @endforeach
@@ -98,7 +100,7 @@
             <input type="text" name="brand" value="{{ old('brand') }}">
 
             <label>商品の説明</label>
-            <textarea name="description" rows="5">{{ old('description')}}"</textarea>
+            <textarea name="description" rows="5">{{ old('description')}}</textarea>
             @error('description')
             <p class="error">{{ $message }}</p>
             @enderror

@@ -11,6 +11,7 @@ class ItemController extends Controller
     public function index(Request $request)
     {
         $tab = $request->query('tab', 'recommend');
+        $keyword = $request->query('keyword');
 
         if ($tab === 'mylist') {
 
@@ -20,7 +21,7 @@ class ItemController extends Controller
 
             $items = Item::whereHas('favoriteUsers', function ($query) {
                 $query->where('user_id', Auth::id());
-            })->get();
+            });
         } else {
 
             $items = Item::query();
@@ -29,11 +30,16 @@ class ItemController extends Controller
             if (Auth::check()) {
                 $items->where('user_id', '!=', Auth::id());
             }
+        }
+        // おすすめ・マイリスト共通で検索
+        if (!empty($keyword)) {
+        $items->where('name', 'like', '%' . $keyword . '%');
+    }
 
             $items = $items->get();
-        }
+        
 
-        return view('items.index', compact('items', 'tab'));
+        return view('items.index', compact('items', 'tab', 'keyword'));
     }
 
 

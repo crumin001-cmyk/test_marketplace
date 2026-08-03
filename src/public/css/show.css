@@ -228,3 +228,18 @@
     margin-bottom: 25px;
     box-sizing: border-box;
 }
+
+.comment-btn {
+    display: block;
+    width: 100%;
+    color: #fff;
+    background: #ff5555;
+    text-align: center;
+    text-decoration: none;
+    padding: 12px 0;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 35px;
+}

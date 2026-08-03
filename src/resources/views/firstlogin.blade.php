@@ -16,17 +16,33 @@
 
             @csrf
 
-            <div class="profile-icon-area">
-                <input type="file"
-                    id="profile_image"
-                    name="image"
-                    hidden>
-                <label for="profile_image" class="circle-icon">
-                    画像を選択する
-                </label>
-                <img id="preview" src="" alt="">
+            <div class="form-width">
 
+                <div class="image-area">
+                    <img id="preview" src="" alt="" class="profile-icon">
+
+                    <label for="image" class="image-btn">
+                        画像を選択する
+                    </label>
+
+                    <input type="file" name="image" id="image" hidden>
+                </div>
             </div>
+            <script>
+                document.getElementById('image').addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    if (!file) return;
+
+                    const reader = new FileReader();
+
+                    reader.onload = function(event) {
+                        document.getElementById('preview').src = event.target.result;
+                    };
+
+                    reader.readAsDataURL(file);
+
+                });
+            </script>
 
             <label>ユーザー名</label>
             <input type="text" name="name" class="input" value="{{ old('name', $user->name) }}">

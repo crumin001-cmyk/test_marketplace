@@ -12,12 +12,18 @@
 @endif
 
 <div class="tab-menu">
-    <a href="{{ route('items.index', ['tab' => 'recommend']) }}"
+    <a href="{{ route('items.index', [
+    'tab' => 'recommend',
+    'keyword' => request('keyword')
+    ]) }}"
         class="tab-text {{ $tab === 'recommend' ? 'active' : '' }}">
         おすすめ
     </a>
 
-    <a href="{{ route('items.index', ['tab' => 'mylist']) }}"
+    <a href="{{ route('items.index', [
+    'tab' => 'mylist',
+    'keyword' => request('keyword')
+    ]) }}"
         class="tab-text {{ $tab === 'mylist' ? 'active' : '' }}">
         マイリスト
     </a>

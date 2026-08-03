@@ -13,7 +13,7 @@ class CommentRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -32,7 +32,8 @@ class CommentRequest extends FormRequest
     public function messages()
     {
         return [
-            'content' => 'コメントを入力してください'
+            'content.required' => 'コメントを入力してください',
+            'content.max' => 'コメントは255文字以内で入力してください。',
         ];
     }
 }
