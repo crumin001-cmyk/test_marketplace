@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use Database\Seeders\ConditionSeeder;
 use App\Models\User;
 use App\Models\Item;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -9,6 +10,12 @@ use Tests\TestCase;
 
 class T09_CommentTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->seed(ConditionSeeder::class);
+    }
     use RefreshDatabase;
 
 

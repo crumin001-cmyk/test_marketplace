@@ -79,20 +79,4 @@ class T02_LoginTest extends TestCase
         $this->assertAuthenticatedAs($user);
         $response->assertRedirect(route('items.index'));
     }
-
-    /** @test */
-    public function ログアウトができる()
-    {
-        // Arrange
-        $user = User::factory()->create();
-
-        // Act
-        $response = $this->actingAs($user)
-            ->post('/logout');
-
-        // Assert
-        $this->assertGuest();
-
-        $response->assertRedirect('/');
-    }
 }

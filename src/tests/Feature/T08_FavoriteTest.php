@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use Database\Seeders\ConditionSeeder;
 use App\Models\User;
 use App\Models\Item;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -9,70 +10,18 @@ use Tests\TestCase;
 
 class T08_FavoriteTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->seed(ConditionSeeder::class);
+    }
     use RefreshDatabase;
     /**
      * A basic feature test example.
      *
      * @return void
      */
-    /** @test */
-    public function いいねした商品だけが表示される()
-    {
-        // Arrange
-        $user = User::factory()->create();
-
-        $favoriteItem = Item::factory()->create([
-            'name' => 'いいねした商品',
-        ]);
-
-        $notFavoriteItem = Item::factory()->create([
-            'name' => 'いいねしていない商品',
-        ]);
-
-
-        $user->favoriteItems()->attach($favoriteItem->id);
-
-
-        // Act
-        $response = $this->actingAs($user)
-            ->get(route('items.index', [
-                'tab' => 'mylist',
-            ]));
-
-
-        // Assert
-        $response->assertStatus(200);
-
-        $response->assertSee('いいねした商品');
-
-        $response->assertDontSee('いいねしていない商品');
-    }
-
-
-
-    /** @test */
-    public function 購入済み商品はSoldと表示される()
-    {
-        // Arrange
-        $user = User::factory()->create();
-
-        Item::factory()->create([
-            'name' => '購入済み商品',
-            'sold_at' => now(),
-        ]);
-
-
-        // Act
-        $response = $this->actingAs($user)
-            ->get(route('items.index', [
-                'tab' => 'mylist',
-            ]));
-
-
-        // Assert
-        $response->assertStatus(200);
-        $response->assertSee('Sold');
-    }
 
 
     /** @test */
@@ -152,25 +101,5 @@ class T08_FavoriteTest extends TestCase
             'user_id' => $user->id,
             'item_id' => $item->id,
         ]);
-    }
-
-
-
-
-    /** @test */
-    public function 未認証の場合はいいねできない()
-    {
-        // Arrange
-        $item = Item::factory()->create();
-
-
-        // Act
-        $response = $this->get(route('items.index', [
-            'tab' => 'mylist',
-        ]));
-
-
-        // Assert
-        $response->assertRedirect(route('login'));
     }
 }

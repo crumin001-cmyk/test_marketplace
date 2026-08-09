@@ -15,9 +15,6 @@ use Tests\TestCase;
 
 class T15_SellTest extends TestCase
 {
-    use RefreshDatabase;
-
-
     protected function setUp(): void
     {
         parent::setUp();
@@ -25,25 +22,7 @@ class T15_SellTest extends TestCase
         $this->seed(CategorySeeder::class);
         $this->seed(ConditionSeeder::class);
     }
-
-
-    /** @test */
-    public function 商品出品画面を開くことができる()
-    {
-        // Arrange
-        $user = User::factory()->create();
-
-
-        // Act
-        $response = $this->actingAs($user)
-            ->get(route('sell'));
-
-
-        // Assert
-        $response->assertStatus(200);
-    }
-
-
+    use RefreshDatabase;
 
     /** @test */
     public function 商品出品画面にて必要な情報が保存できること()

@@ -8,6 +8,7 @@ use Tests\TestCase;
 
 class T01_RegisterTest extends TestCase
 {
+    use RefreshDatabase;
     /**
      * A basic feature test example.
      *
@@ -15,7 +16,7 @@ class T01_RegisterTest extends TestCase
      */
 
     /** @test */
-    public function  名前が入力されていない場合、バリデーションメッセージが表示される()
+    public function 名前が入力されていない場合、バリデーションメッセージが表示される()
     {
         // Arrange
         $response = $this->get('/register');
@@ -27,8 +28,7 @@ class T01_RegisterTest extends TestCase
             'password' => 'password',
             'password_confirmation' => 'password',
         ]);
-        dd($response->exception->errors());
-        // Assert
+
         $response->assertSessionHasErrors('name');
     }
 
@@ -116,6 +116,6 @@ class T01_RegisterTest extends TestCase
         $this->assertDatabaseHas('users', [
             'email' => 'test@example.com',
         ]);
-        $response->assertRedirect(route('firstLogin'));
+        $response->assertRedirect(route('verification.notice'));
     }
 }

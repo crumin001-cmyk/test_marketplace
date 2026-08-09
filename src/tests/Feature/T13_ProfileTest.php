@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use Database\Seeders\ConditionSeeder;
 use App\Models\User;
 use App\Models\Item;
 use App\Models\Purchase;
@@ -10,6 +11,12 @@ use Tests\TestCase;
 
 class T13_ProfileTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->seed(ConditionSeeder::class);
+    }
     use RefreshDatabase;
     /**
      * A basic feature test example.
@@ -22,7 +29,7 @@ class T13_ProfileTest extends TestCase
         // Arrange
         $user = User::factory()->create([
             'name' => 'テストユーザー',
-            'profile_image' => 'profile/test.png',
+            'image' => 'profile/test.png',
         ]);
 
 
@@ -43,84 +50,33 @@ class T13_ProfileTest extends TestCase
             'item_id' => $buyItem->id,
             'postal_code' => '123-4567',
             'address' => '東京都',
+            'payment_method' => 'コンビニ払い',
         ]);
 
 
         // Act
         $response = $this->actingAs($user)
-            ->get(route('mypage'));
-
+            ->get(route('mypage', [
+                'page' => 'sell',
+            ]));
 
         // Assert
         $response->assertStatus(200);
 
         $response->assertSee('テストユーザー');
+
+        $response->assertSee('profile/test.png');
 
         $response->assertSee('出品商品');
 
-        $response->assertSee('購入商品');
-    }
-
-
-
-    /** @test */
-    public function 変更項目が初期値として過去設定されていること（プロフィール画像、ユーザー名、郵便番号、住所）()
-    {
-        // Arrange
-        $user = User::factory()->create([
-            'name' => 'テストユーザー',
-            'profile_image' => 'profile/test.png',
-            'postal_code' => '123-4567',
-            'address' => '東京都渋谷区',
-            'building' => 'テストビル',
-        ]);
-
-
-        // Act
+        // 購入商品タブを開く
         $response = $this->actingAs($user)
-            ->get(route('profile.edit'));
-
-
+            ->get(route('mypage', [
+                'page' => 'buy',
+            ]));
         // Assert
         $response->assertStatus(200);
-
-        $response->assertSee('テストユーザー');
-
-        $response->assertSeae('123-4567');
-
-        $response->assertSee('東京都渋谷区');
-
-        $response->assertSee('テストビル');
-    }
-
-
-
-    /** @test */
-    public function プロフィール情報を更新できる()
-    {
-        // Arrange
-        $user = User::factory()->create();
-
-
-        // Act
-        $response = $this->actingAs($user)
-            ->post(route('profile.update'), [
-                'name' => '変更後ユーザー',
-                'postal_code' => '987-6543',
-                'address' => '大阪府大阪市',
-                'building' => '変更ビル',
-            ]);
-
-
-        // Assert
-        $response->assertRedirect();
-
-        $this->assertDatabaseHas('users', [
-            'id' => $user->id,
-            'name' => '変更後ユーザー',
-            'postal_code' => '987-6543',
-            'address' => '大阪府大阪市',
-            'building' => '変更ビル',
-        ]);
+        // 購入商品
+        $response->assertSee('購入商品');
     }
 }

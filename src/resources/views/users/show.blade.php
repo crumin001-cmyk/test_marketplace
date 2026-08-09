@@ -28,7 +28,7 @@
 
     </div>
     <h2 class="user-name">
-        ユーザー名
+        {{ $user->name }}
     </h2>
 
     <a href="{{ route('profile.edit') }}" class="edit-btn">

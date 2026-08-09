@@ -36,7 +36,7 @@
         <div class="item-box">
             @if($item->image_path)
 
-            @if($item->purchase)
+            @if($item->sold_at)
             <img
                 class="item-image"
                 src="{{ asset('storage/' . $item->image_path) }}"

@@ -16,12 +16,12 @@ class ItemController extends Controller
         if ($tab === 'mylist') {
 
             if (!Auth::check()) {
-                return redirect()->route('login');
+                $items = Item::whereRaw('1 = 0');
+            } else {
+                $items = Item::whereHas('favoriteUsers', function ($query) {
+                    $query->where('user_id', Auth::id());
+                });
             }
-
-            $items = Item::whereHas('favoriteUsers', function ($query) {
-                $query->where('user_id', Auth::id());
-            });
         } else {
 
             $items = Item::query();
@@ -33,11 +33,11 @@ class ItemController extends Controller
         }
         // おすすめ・マイリスト共通で検索
         if (!empty($keyword)) {
-        $items->where('name', 'like', '%' . $keyword . '%');
-    }
+            $items->where('name', 'like', '%' . $keyword . '%');
+        }
 
-            $items = $items->get();
-        
+        $items = $items->get();
+
 
         return view('items.index', compact('items', 'tab', 'keyword'));
     }

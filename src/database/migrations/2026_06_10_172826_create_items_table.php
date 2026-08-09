@@ -27,10 +27,6 @@ class CreateItemsTable extends Migration
         });
     }
 
-    public function favoritedUsers()
-    {
-        return $this->belongsToMany(Item::class, 'favorites');
-    }
 
     /**
      * Reverse the migrations.
