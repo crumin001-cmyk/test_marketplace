@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Condition;
 
 class Condition extends Model
 {
@@ -11,11 +10,4 @@ class Condition extends Model
         'name',
         'sort_order',
     ];
-
-    public function condition()
-{
-    return $this->hasMany(Condition::class);
-}
-
-
 }
