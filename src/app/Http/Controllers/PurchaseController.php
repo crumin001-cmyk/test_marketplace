@@ -33,22 +33,60 @@ class PurchaseController extends Controller
                 ->route('purchase.show', $item->id)
                 ->with('message', 'この商品は購入済みです。');
         }
+        // 支払い方法をStripe用に変換
+        if ($request->payment_method === 'credit') {
+            $paymentMethodType = 'card';
+        } elseif ($request->payment_method === 'convenience') {
+            $paymentMethodType = 'konbini';
+        } else {
+            return back()
+                ->withErrors([
+                    'payment_method' => '支払い方法を選択してください。',
+                ])
+                ->withInput();
+        }
 
-        Purchase::create([
-            'user_id' => Auth::id(),
-            'item_id' => $item_id,
-            'postal_code' => $request->postal_code,
-            'address' => $request->address,
-            'building' => $request->building,
-            'payment_method' => $request->payment_method,
-        ]);
-        // Sold状態にする
-        $item->update([
-            'sold_at' => now(),
+        // Stripe Checkout Sessionを作成
+        $stripe = new \Stripe\StripeClient(
+            config('services.stripe.secret')
+        );
+
+        $session = $stripe->checkout->sessions->create([
+            'mode' => 'payment',
+
+            'payment_method_types' => [
+                $paymentMethodType,
+            ],
+
+            'line_items' => [
+                [
+                    'price_data' => [
+                        'currency' => 'jpy',
+
+                        'product_data' => [
+                            'name' => $item->name,
+                        ],
+
+                        'unit_amount' => $item->price,
+                    ],
+
+                    'quantity' => 1,
+                ],
+            ],
+
+            'customer_email' => Auth::user()->email,
+
+            'success_url' => route('purchase.success', [
+                'item_id' => $item->id,
+            ]),
+
+            'cancel_url' => route('purchase.cancel', [
+                'item_id' => $item->id,
+            ]),
         ]);
 
-        return redirect()->route('items.index')
-            ->with('message', 'お買い上げありがとうございます。');
+        return redirect($session->url);
+
     }
 
     public function edit($item_id)
@@ -69,5 +107,19 @@ class PurchaseController extends Controller
             ],
         ]);
         return redirect()->route('purchase.show', ['item_id' => $item_id]);
+    }
+
+    public function success($item_id)
+    {
+        return redirect()
+            ->route('items.index')
+            ->with('message', 'Stripe決済画面での手続きが完了しました。');
+    }
+
+    public function cancel($item_id)
+    {
+        return redirect()
+            ->route('purchase.show', ['item_id' => $item_id])
+            ->with('message', '決済がキャンセルされました。');
     }
 }

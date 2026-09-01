@@ -30,17 +30,4 @@ class PurchaseRequest extends FormRequest
             'building' => ['nullable'],
         ];
     }
-
-    /**
-     * エラーメッセージ
-     */
-    public function messages()
-    {
-        return [
-            'payment_method.required' => '支払い方法を選択してください。',
-            'postal_code.required' => '郵便番号を入力してください',
-            'postal_code.regex' => '郵便番号はハイフンを入れて入力してください',
-            'address.required' => '住所を入力してください',
-        ];
-    }
 }
